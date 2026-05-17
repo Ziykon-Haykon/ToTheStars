@@ -1,5 +1,6 @@
 package com.tothestars.tothestars.entity;
 
+import com.tothestars.tothestars.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

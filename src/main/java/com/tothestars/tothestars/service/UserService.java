@@ -1,6 +1,6 @@
 package com.tothestars.tothestars.service;
 
-import com.tothestars.tothestars.UserMapper;
+import com.tothestars.tothestars.mapper.UserMapper;
 import com.tothestars.tothestars.dto.request.UserRequest;
 import com.tothestars.tothestars.dto.response.UserResponse;
 import com.tothestars.tothestars.entity.User;
@@ -24,6 +24,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
         return userMapper.toDto(user);
+    }
+
+    public UserResponse login(UserRequest request) {
+        return userMapper.toDto(userRepository.findByEmail(request.getEmail()));
     }
 
     public List<UserResponse> getAll() {

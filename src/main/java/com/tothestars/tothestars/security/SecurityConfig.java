@@ -16,7 +16,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
                             "user/register",
-                                "user/getAll"
+                                "user/getAll",
+                                "user/login"
                         ).permitAll().anyRequest().authenticated());
         return httpSecurity.build();
     }

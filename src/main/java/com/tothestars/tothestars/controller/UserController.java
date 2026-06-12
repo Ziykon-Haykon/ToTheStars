@@ -23,4 +23,9 @@ public class UserController {
     public List<UserResponse> getAll() {
         return userService.getAll();
     }
+
+    @PostMapping("/login")
+    public UserResponse login(@RequestBody UserRequest request) {
+        return userService.login(request);
+    }
 }

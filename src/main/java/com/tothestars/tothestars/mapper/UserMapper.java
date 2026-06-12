@@ -1,4 +1,4 @@
-package com.tothestars.tothestars;
+package com.tothestars.tothestars.mapper;
 
 import com.tothestars.tothestars.dto.response.UserResponse;
 import com.tothestars.tothestars.entity.User;

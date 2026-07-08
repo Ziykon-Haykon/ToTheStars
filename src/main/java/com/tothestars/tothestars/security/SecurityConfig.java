@@ -19,7 +19,8 @@ public class SecurityConfig {
                                 "user/getAll",
                                 "task/create",
                                 "user/login",
-                                "task/getAll"
+                                "task/getAll",
+                                "task/{id}"
                         ).permitAll().anyRequest().authenticated());
         return httpSecurity.build();
     }

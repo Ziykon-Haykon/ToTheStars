@@ -1,14 +1,11 @@
 package com.tothestars.tothestars.controller;
 
+import com.tothestars.tothestars.dto.request.TaskPatchRequest;
 import com.tothestars.tothestars.dto.request.TaskRequest;
 import com.tothestars.tothestars.dto.response.TaskResponse;
 import com.tothestars.tothestars.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class TaskController {
     @GetMapping("/getAll")
     public List<TaskResponse> getAll() {
         return taskService.getAll();
+    }
+
+    @PatchMapping("/{id}")
+    public TaskResponse patchTask(@PathVariable Long id, @RequestBody TaskPatchRequest request) {
+        return taskService.patchTask(id, request);
     }
 }

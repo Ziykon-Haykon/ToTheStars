@@ -1,5 +1,6 @@
 package com.tothestars.tothestars.service;
 
+import com.tothestars.tothestars.dto.request.TaskPatchRequest;
 import com.tothestars.tothestars.dto.request.TaskRequest;
 import com.tothestars.tothestars.dto.response.TaskResponse;
 import com.tothestars.tothestars.entity.Task;
@@ -26,6 +27,21 @@ public class TaskService {
         task.setUser(user);
         task.setName(request.getName());
         task.setIsDone(request.getIsDone());
+        taskRepository.save(task);
+        return taskMapper.toDto(task);
+    }
+
+    public TaskResponse patchTask(Long id, TaskPatchRequest request) {
+        var task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+        if (request.name != null) {
+            task.setName(request.getName());
+        }
+        if (request.isDone != null) {
+            task.setIsDone(request.getIsDone());
+        }
+        if (request.description != null) {
+            task.setDescription(request.getDescription());
+        }
         taskRepository.save(task);
         return taskMapper.toDto(task);
     }

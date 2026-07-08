@@ -49,4 +49,9 @@ public class TaskService {
     public List<TaskResponse> getAll() {
         return taskRepository.findAll().stream().map(taskMapper::toDto).toList();
     }
+
+    public void deleteTask(Long id) {
+        var task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+        taskRepository.delete(task);
+    }
 }

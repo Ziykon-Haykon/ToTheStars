@@ -30,6 +30,11 @@ public class TaskController {
         return taskService.patchTask(id, request);
     }
 
+    @GetMapping("/{id}")
+    public TaskResponse getTask(@PathVariable Long id) {
+        return taskService.getTask(id);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);

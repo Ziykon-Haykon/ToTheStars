@@ -47,6 +47,11 @@ public class TaskService {
         return taskMapper.toDto(task);
     }
 
+    public TaskResponse getTask(Long id) {
+        var task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+        return taskMapper.toDto(task);
+    }
+
     public List<TaskResponse> getAll() {
         return taskRepository.findAll().stream().map(taskMapper::toDto).toList();
     }

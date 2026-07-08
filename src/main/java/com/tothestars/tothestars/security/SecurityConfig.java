@@ -17,7 +17,9 @@ public class SecurityConfig {
                         auth.requestMatchers(
                             "user/register",
                                 "user/getAll",
-                                "user/login"
+                                "task/create",
+                                "user/login",
+                                "task/getAll"
                         ).permitAll().anyRequest().authenticated());
         return httpSecurity.build();
     }

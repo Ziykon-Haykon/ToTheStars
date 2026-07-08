@@ -16,7 +16,11 @@ public class Task {
     private String name;
 
     @Column(name = "is_done")
-    private Boolean idDone;
+    private Boolean isDone;
 
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

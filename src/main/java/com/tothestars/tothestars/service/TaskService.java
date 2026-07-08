@@ -4,6 +4,7 @@ import com.tothestars.tothestars.dto.request.TaskPatchRequest;
 import com.tothestars.tothestars.dto.request.TaskRequest;
 import com.tothestars.tothestars.dto.response.TaskResponse;
 import com.tothestars.tothestars.entity.Task;
+import com.tothestars.tothestars.exception.ResourceNotFoundException;
 import com.tothestars.tothestars.mapper.TaskMapper;
 import com.tothestars.tothestars.repository.TaskRepository;
 import com.tothestars.tothestars.repository.UserRepository;
@@ -21,7 +22,7 @@ public class TaskService {
 
     public TaskResponse createTask(TaskRequest request) {
         var user = userRepository.findById(request.getUserId()).orElseThrow(
-                () -> new RuntimeException("User not find"));
+                () -> new ResourceNotFoundException("User not found"));
         var task = new Task();
         task.setDescription(request.getDescription());
         task.setUser(user);
@@ -32,7 +33,7 @@ public class TaskService {
     }
 
     public TaskResponse patchTask(Long id, TaskPatchRequest request) {
-        var task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+        var task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
         if (request.name != null) {
             task.setName(request.getName());
         }
@@ -51,7 +52,7 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
-        var task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+        var task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
         taskRepository.delete(task);
     }
 }

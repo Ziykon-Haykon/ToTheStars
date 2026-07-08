@@ -5,6 +5,8 @@ import com.tothestars.tothestars.mapper.UserMapper;
 import com.tothestars.tothestars.dto.request.UserRequest;
 import com.tothestars.tothestars.dto.response.UserRegisterResponse;
 import com.tothestars.tothestars.entity.User;
+import com.tothestars.tothestars.exception.ResourceNotFoundException;
+import com.tothestars.tothestars.exception.WrongPasswordException;
 import com.tothestars.tothestars.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,10 +33,10 @@ public class UserService {
     public UserLoginResponse login(UserRequest request) {
         var user = userRepository.findByEmail(request.getEmail());
         if (user == null) {
-            throw new RuntimeException("not found");
+            throw new ResourceNotFoundException("User not found");
         }
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Wrong Password");
+            throw new WrongPasswordException("Wrong password");
         }
 
         var token = jwtService.generateToker(user.getEmail());
